@@ -1,6 +1,6 @@
 package io.github.rajasekaranap.gmeettool;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.rajasekaranap.gmeettool.dao.StudentDao;
 import io.github.rajasekaranap.gmeettool.impl.StudenDaoImpl;
 
@@ -16,8 +16,13 @@ public class MappingController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         StudentDao studentDao = (StudentDao) req.getServletContext().getAttribute("studentdao");
-        String mapping = new Gson().toJson(studentDao.getAllStudents());
-        resp.setContentType("application/json");
-        resp.getWriter().write(mapping);
+        String mapping = new ObjectMapper().writeValueAsString(studentDao.getAllStudents());
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        resp.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        resp.addHeader("Access-Control-Max-Age", "1728000");
+        resp.setContentType("application/json;charset=UTF-8");
+        resp.getWriter().print(mapping);
     }
 }
