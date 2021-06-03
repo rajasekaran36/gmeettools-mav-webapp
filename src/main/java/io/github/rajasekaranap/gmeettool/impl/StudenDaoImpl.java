@@ -48,6 +48,18 @@ public class StudenDaoImpl implements StudentDao {
     }
 
     @Override
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    @Override
+    public void addStudent(String rollNo, String name, List<String> gmeetNames) {
+        Student student = new Student(rollNo,name);
+        student.setGmeetNames(gmeetNames);
+        this.addStudent(student);
+    }
+
+    @Override
     public void addStudent(String rollNo, String name) {
         students.add(new Student(rollNo,name));
     }
@@ -64,5 +76,9 @@ public class StudenDaoImpl implements StudentDao {
             return true;
         }
         return false;
+    }
+
+    public List<Student> getAllStudents(){
+        return students;
     }
 }

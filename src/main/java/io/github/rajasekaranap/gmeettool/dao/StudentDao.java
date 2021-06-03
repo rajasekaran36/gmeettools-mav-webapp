@@ -10,6 +10,11 @@ public interface StudentDao {
     public Student getStudentByName(String name);
     public List<String> getGmeetNamesByName(String name);
     public List<String> getGmeetNamesByRollNo(String rollNo);
+    public void addStudent(Student student);
+    public void addStudent(String rollNo,String name,List<String> gmeetNames);
     public void addStudent(String rollNo,String name);
     public void addStudents(Map<String,String> rollNoNameMap);
+    public boolean addGmeetName(String name, String gmeetName);
+    public List<Student> getAllStudents();
 }
+
